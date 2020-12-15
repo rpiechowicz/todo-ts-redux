@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { Portal } from "../../components";
+import { useSelector } from "react-redux";
+import { selectTasks } from "../../store/reducers/tasksReducers";
+
+import { Portal, List } from "../../components";
 
 import { AppBar, Tabs, Tab, Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,7 +14,7 @@ const useStyles = makeStyles({
 });
 
 interface TabPanelProps {
-  children?: React.ReactNode;
+  children: any;
   index: any;
   value: any;
 }
@@ -29,7 +32,7 @@ function TabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <Typography>{children[0]?.text}</Typography>
         </Box>
       )}
     </div>
@@ -45,6 +48,11 @@ function a11yProps(index: any) {
 
 function TasksList() {
   const [value, setValue] = useState(0);
+
+  const tasks = useSelector(selectTasks);
+  const activeTasks = tasks.filter((task: any) => task.active);
+  const finishedTasks = tasks.filter((task: any) => !task.active);
+
   const classes = useStyles();
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -66,12 +74,12 @@ function TasksList() {
               <Tab label="Finished Tasks" {...a11yProps(1)} />
             </Tabs>
           </AppBar>
-          <TabPanel value={value} index={0}>
-            Item One
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            Item Two
-          </TabPanel>
+
+          {/* Active Tasks */}
+          <List tasks={activeTasks} value={value} index={0} />
+
+          {/* Finished Task */}
+          <List tasks={finishedTasks} value={value} index={1} />
         </div>
       </Portal>
     </div>

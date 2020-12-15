@@ -1,29 +1,126 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface tasksState {
-  tasks: [];
+  error: boolean;
+  tasks: [
+    {
+      id: string;
+      text: string;
+      date: string;
+      active: boolean;
+      priority: boolean;
+    },
+    {
+      id: string;
+      text: string;
+      date: string;
+      active: boolean;
+      priority: boolean;
+    }
+  ];
 }
 
-const initialState: tasksState = { tasks: [] };
+const initialState: tasksState = {
+  error: false,
+  tasks: [
+    {
+      id: "eefffa0d-898e-4db3-885e-3384a8aad3a4",
+      text: "Nauczyć się TS",
+      date: "20-12-2020",
+      active: true,
+      priority: true,
+    },
+    {
+      id: "eefffa0d-898e-4db3-885e-3384a8aad3a4",
+      text: "Umyć auto",
+      date: "10-12-2020",
+      active: false,
+      priority: true,
+    },
+  ],
+};
 
 const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
     add(state, action: PayloadAction<[]>) {
-      state.tasks = [];
+      state.tasks = [
+        {
+          id: "",
+          text: "",
+          date: "",
+          active: true,
+          priority: true,
+        },
+        {
+          id: "",
+          text: "",
+          date: "",
+          active: true,
+          priority: true,
+        },
+      ];
     },
     finish(state, action: PayloadAction<[]>) {
-      state.tasks = [];
+      state.tasks = [
+        {
+          id: "",
+          text: "",
+          date: "",
+          active: true,
+          priority: true,
+        },
+        {
+          id: "",
+          text: "",
+          date: "",
+          active: true,
+          priority: true,
+        },
+      ];
     },
     remove(state, action: PayloadAction<[]>) {
-      state.tasks = [];
+      state.tasks = [
+        {
+          id: "",
+          text: "",
+          date: "",
+          active: true,
+          priority: true,
+        },
+        {
+          id: "",
+          text: "",
+          date: "",
+          active: true,
+          priority: true,
+        },
+      ];
     },
     error(state, action: PayloadAction<[]>) {
-      state.tasks = [];
+      state.tasks = [
+        {
+          id: "",
+          text: "",
+          date: "",
+          active: true,
+          priority: true,
+        },
+        {
+          id: "",
+          text: "",
+          date: "",
+          active: true,
+          priority: true,
+        },
+      ];
     },
   },
 });
 
 export const { add, finish, remove, error } = tasksSlice.actions;
+
+export const selectTasks = (state: any) => state.tasks.tasks;
+
 export default tasksSlice.reducer;

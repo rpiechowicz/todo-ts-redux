@@ -4,7 +4,7 @@ import { selectTasks } from "../../store/reducers/tasksReducers";
 
 import { Portal, List } from "../../components";
 
-import { AppBar, Tabs, Tab, Box, Typography } from "@material-ui/core";
+import { AppBar, Tabs, Tab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -12,32 +12,6 @@ const useStyles = makeStyles({
     flexGrow: 1,
   },
 });
-
-interface TabPanelProps {
-  children: any;
-  index: any;
-  value: any;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children[0]?.text}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
 
 function a11yProps(index: any) {
   return {

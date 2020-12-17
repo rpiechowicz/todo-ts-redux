@@ -15,6 +15,7 @@ function List(props: ListProps) {
     <div>
       {tasks.map((task: any) => (
         <div
+          key={task.id}
           role="tabpanel"
           hidden={value !== index}
           id={`simple-tabpanel-${index}`}

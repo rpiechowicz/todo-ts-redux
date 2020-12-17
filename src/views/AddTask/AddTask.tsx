@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+
+import DialogTask from "./DialogTask";
 
 import { Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
@@ -13,13 +15,35 @@ const useStyles = makeStyles({
 });
 
 function AddTask() {
+  const [openDialog, setOpenDialog] = useState(false);
+
   const classes = useStyles();
+
+  const handleOpenDialog = () => setOpenDialog(true);
+  const handleCloseDialog = () => setOpenDialog(false);
+
+  const handleAddTask = (text: string, date: string, priority: boolean) => {
+    console.log("add", text, date, priority);
+
+    setOpenDialog(false);
+  };
 
   return (
     <div className={classes.addTask}>
-      <Fab size="large" color="secondary" aria-label="add">
+      <Fab
+        size="large"
+        color="secondary"
+        aria-label="add"
+        onClick={handleOpenDialog}
+      >
         <AddIcon />
       </Fab>
+
+      <DialogTask
+        openDialog={openDialog}
+        addTask={handleAddTask}
+        closeDialog={handleCloseDialog}
+      />
     </div>
   );
 }

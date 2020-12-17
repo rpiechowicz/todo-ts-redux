@@ -98,23 +98,8 @@ const tasksSlice = createSlice({
         },
       ];
     },
-    error(state, action: PayloadAction<[]>) {
-      state.tasks = [
-        {
-          id: "",
-          text: "",
-          date: "",
-          active: true,
-          priority: true,
-        },
-        {
-          id: "",
-          text: "",
-          date: "",
-          active: true,
-          priority: true,
-        },
-      ];
+    error(state, action: PayloadAction<{ error: boolean }>) {
+      state.error = action.payload.error;
     },
   },
 });
@@ -122,5 +107,6 @@ const tasksSlice = createSlice({
 export const { add, finish, remove, error } = tasksSlice.actions;
 
 export const selectTasks = (state: any) => state.tasks.tasks;
+export const selectError = (state: any) => state.tasks.error;
 
 export default tasksSlice.reducer;

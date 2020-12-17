@@ -7,6 +7,14 @@ import { Portal, List } from "../../components";
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+interface stateTask {
+  id?: void | string;
+  text?: string;
+  date?: string;
+  active?: boolean;
+  priority?: boolean;
+}
+
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
@@ -22,10 +30,10 @@ function a11yProps(index: any) {
 
 function TasksList() {
   const [value, setValue] = useState(0);
-
   const tasks = useSelector(selectTasks);
-  const activeTasks = tasks.filter((task: any) => task.active);
-  const finishedTasks = tasks.filter((task: any) => !task.active);
+
+  const activeTasks = tasks.filter((task: stateTask) => task.active);
+  const finishedTasks = tasks.filter((task: stateTask) => !task.active);
 
   const classes = useStyles();
 

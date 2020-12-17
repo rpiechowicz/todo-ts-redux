@@ -43,11 +43,11 @@ function Task(props: taskInterface) {
   );
 
   return (
-    <Box p={3}>
+    <Box p={1}>
       <ListMaterial>
         <ListItem>
           <ListItemText primary={text} secondary={secondaryText} />
-          <ListItemText>{date}</ListItemText>
+          <ListItemText className={classes.date}>{date}</ListItemText>
           <ListItemSecondaryAction>
             <IconButton
               edge="end"

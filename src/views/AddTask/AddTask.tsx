@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+
+import { add } from "../../store/reducers/tasksReducers";
 
 import DialogTask from "./DialogTask";
 
@@ -15,6 +19,7 @@ const useStyles = makeStyles({
 });
 
 function AddTask() {
+  const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
 
   const classes = useStyles();
@@ -23,7 +28,15 @@ function AddTask() {
   const handleCloseDialog = () => setOpenDialog(false);
 
   const handleAddTask = (text: string, date: string, priority: boolean) => {
-    console.log("add", text, date, priority);
+    const task = {
+      id: uuidv4(),
+      text,
+      date: new Date(date).toLocaleDateString().split(".").join("-"),
+      active: true,
+      priority,
+    };
+
+    dispatch(add({ task }));
 
     setOpenDialog(false);
   };

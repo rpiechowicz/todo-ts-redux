@@ -2,22 +2,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface tasksState {
   error: boolean;
-  tasks: [
-    {
-      id: string;
-      text: string;
-      date: string;
-      active: boolean;
-      priority: boolean;
-    },
-    {
-      id: string;
-      text: string;
-      date: string;
-      active: boolean;
-      priority: boolean;
-    }
-  ];
+  tasks: stateTask[];
+}
+
+interface stateTask {
+  id: void | string;
+  text: string;
+  date: string;
+  active: boolean;
+  priority: boolean;
 }
 
 const initialState: tasksState = {
@@ -44,59 +37,14 @@ const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    add(state, action: PayloadAction<[]>) {
-      state.tasks = [
-        {
-          id: "",
-          text: "",
-          date: "",
-          active: true,
-          priority: true,
-        },
-        {
-          id: "",
-          text: "",
-          date: "",
-          active: true,
-          priority: true,
-        },
-      ];
+    add(state: tasksState, action: PayloadAction<{ task: stateTask }>) {
+      state.tasks = [...state.tasks, action.payload.task];
     },
     finish(state, action: PayloadAction<[]>) {
-      state.tasks = [
-        {
-          id: "",
-          text: "",
-          date: "",
-          active: true,
-          priority: true,
-        },
-        {
-          id: "",
-          text: "",
-          date: "",
-          active: true,
-          priority: true,
-        },
-      ];
+      return;
     },
     remove(state, action: PayloadAction<[]>) {
-      state.tasks = [
-        {
-          id: "",
-          text: "",
-          date: "",
-          active: true,
-          priority: true,
-        },
-        {
-          id: "",
-          text: "",
-          date: "",
-          active: true,
-          priority: true,
-        },
-      ];
+      return;
     },
     error(state, action: PayloadAction<{ error: boolean }>) {
       state.error = action.payload.error;

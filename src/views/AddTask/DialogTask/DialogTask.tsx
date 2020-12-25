@@ -92,7 +92,14 @@ function DialogTask(props: any) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [priorityCheck, setPriorityCheck] = useState(false);
 
-  const handleClose = () => closeDialog();
+  const handleClose = () => {
+    setInputTask("");
+    setSelectedDate(new Date());
+    setPriorityCheck(false);
+    errorIsActive && dispatch(error({ error: false }));
+
+    closeDialog();
+  };
   const handleAddTask = () => {
     if (!inputTask) {
       dispatch(error({ error: true }));

@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
 interface tasksState {
   error: boolean;
   tasks: stateTask[];
